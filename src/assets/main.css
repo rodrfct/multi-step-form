@@ -33,4 +33,5 @@
 body {
   font-family: 'Ubuntu', sans-serif;
   font-size: 16px;
+  background-color: var(--Magnolia);
 }
