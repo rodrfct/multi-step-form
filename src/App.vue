@@ -28,6 +28,5 @@ const step =ref<number>(1)
 
   display: grid;
   grid-template-columns: 30% 1fr;
-  column-gap: 10%;
 }
 </style>
