@@ -1,13 +1,17 @@
 <script setup lang="ts">
+import { ref } from 'vue';
 import Sidebar from './components/Sidebar.vue'
 import Form from './components/Form.vue'
+
+const step =ref<number>(1)
+
 </script>
 
 <template>
 <div class="wrapper">
-  <Sidebar />
+  <Sidebar :step="step" />
 
-  <Form />
+  <Form :step="step" />
 </div>
 </template>
 

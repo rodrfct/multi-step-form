@@ -1,9 +1,14 @@
 <script setup lang="ts">
-import { computed, ref } from 'vue';
+import { computed } from 'vue';
 import bgDesktop from '../assets/backgrounds/bg-sidebar-desktop.svg'
 import bgMobile from '../assets/backgrounds/bg-sidebar-mobile.svg'
 
-const step = ref(1)
+const props = defineProps({
+    step: {
+        type: Number,
+        required: true
+    }
+})
 
 const bgImage = computed(() => {
     if (window.innerWidth > 420) {
@@ -18,7 +23,7 @@ const bgImage = computed(() => {
 <template>
     <div class="sidebar" :style="{backgroundImage: `url(${bgImage})`}">
         <ol>
-            <li>
+            <li :class="{ active: props.step == 1}">
                 <div class="number"><p>1</p></div>
 
                 <div class="text">
@@ -26,7 +31,7 @@ const bgImage = computed(() => {
                     <p>Your info</p>
                 </div>
             </li>
-            <li>
+            <li :class="{ active: props.step == 2}">
                 <div class="number"><p>2</p></div>
 
                 <div class="text">
@@ -34,7 +39,7 @@ const bgImage = computed(() => {
                     <p>Select plan</p>
                 </div>
             </li>
-            <li>
+            <li :class="{ active: props.step == 3}">
                 <div class="number"><p>3</p></div>
 
                 <div class="text">
@@ -42,7 +47,7 @@ const bgImage = computed(() => {
                     <p>Add-ons</p>
                 </div>
             </li>
-            <li>
+            <li :class="{ active: props.step == 4}">
                 <div class="number"><p>4</p></div>
 
                 <div class="text">
@@ -117,5 +122,11 @@ const bgImage = computed(() => {
     display: inline;
     vertical-align: middle;
     font-weight: 500;
+}
+
+.active .number {
+    background-color: var(--Pastel-blue);
+    color: var(--Marine-blue);
+    border-color: var(--Pastel-blue);
 }
 </style>
