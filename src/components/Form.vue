@@ -19,5 +19,10 @@ const props = defineProps({
         <Step2 v-else-if="props.step == 2" />
         <Step3 v-else-if="props.step == 3" />
         <Step4 v-else-if="props.step == 4" />
+    
+        <div class="step-switcher">
+            <button v-show="props.step > 1" @click="$emit('step-back')" type="button">Go Back</button>
+            <button v-show="props.step <= 4" @click="$emit('step-forward')" type="button">Next Step</button>
+        </div>
     </form>
 </template>

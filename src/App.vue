@@ -9,9 +9,12 @@ const step =ref<number>(1)
 
 <template>
 <div class="wrapper">
-  <Sidebar :step="step" />
+  <Sidebar :step="step"
+  @selectStep="(selectedStep) => {if (selectedStep >= 1 && selectedStep <= 4) {step = selectedStep}}" />
 
-  <Form :step="step" />
+  <Form :step="step"
+  @stepBack="() => {if (step > 1) {step--}}" 
+  @stepForward="() => {if (step < 4) {step++}}" />
 </div>
 </template>
 

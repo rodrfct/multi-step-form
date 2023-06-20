@@ -23,7 +23,8 @@ const bgImage = computed(() => {
 <template>
     <div class="sidebar" :style="{backgroundImage: `url(${bgImage})`}">
         <ol>
-            <li :class="{ active: props.step == 1}">
+            <li :class="{ active: props.step == 1}"
+            @click="$emit('select-step', 1)" >
                 <div class="number"><p>1</p></div>
 
                 <div class="text">
@@ -31,7 +32,8 @@ const bgImage = computed(() => {
                     <p>Your info</p>
                 </div>
             </li>
-            <li :class="{ active: props.step == 2}">
+            <li :class="{ active: props.step == 2}"
+            @click="$emit('select-step', 2)" >
                 <div class="number"><p>2</p></div>
 
                 <div class="text">
@@ -39,7 +41,8 @@ const bgImage = computed(() => {
                     <p>Select plan</p>
                 </div>
             </li>
-            <li :class="{ active: props.step == 3}">
+            <li :class="{ active: props.step == 3}"
+            @click="$emit('select-step', 3)" >
                 <div class="number"><p>3</p></div>
 
                 <div class="text">
@@ -47,7 +50,8 @@ const bgImage = computed(() => {
                     <p>Add-ons</p>
                 </div>
             </li>
-            <li :class="{ active: props.step == 4}">
+            <li :class="{ active: props.step == 4}"
+            @click="$emit('select-step', 4)" >
                 <div class="number"><p>4</p></div>
 
                 <div class="text">
