@@ -22,5 +22,9 @@ const step =ref<number>(1)
   margin: auto;
   padding: 10px;
   border-radius: 15px;
+
+  display: grid;
+  grid-template-columns: 30% 1fr;
+  column-gap: 10%;
 }
 </style>

@@ -61,7 +61,6 @@ const bgImage = computed(() => {
 
 <style scoped>
 .sidebar {
-    width: 30%;
     padding: 10px 0;
 
     background-repeat: no-repeat;
@@ -74,11 +73,6 @@ const bgImage = computed(() => {
 
     color: var(--White);
 }
-
-/* .sidebar li {
-    display: flex;
-    justify-content: space-between;
-} */
 
 .sidebar li {
     margin: 10% 0;
