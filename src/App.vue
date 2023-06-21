@@ -22,12 +22,12 @@ const step =ref<number>(1)
 .wrapper {
   background-color: var(--Alabaster);
   width: 85%;
-  height: 450px;
+  height: 550px;
   margin: auto;
-  padding: 10px;
+  padding: 13px;
   border-radius: 15px;
 
   display: grid;
-  grid-template-columns: 30% 1fr;
+  grid-template-columns: 33% 1fr;
 }
 </style>

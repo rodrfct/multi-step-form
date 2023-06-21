@@ -68,7 +68,7 @@ const bgImage = computed(() => {
     padding: 10px 0;
 
     background-repeat: no-repeat;
-    background-size: cover;
+    background-size: 100%;
 }
 
 .sidebar ol {
