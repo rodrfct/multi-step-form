@@ -22,6 +22,7 @@ const step =ref<number>(1)
 .wrapper {
   background-color: var(--Alabaster);
   width: 85%;
+  height: 450px;
   margin: auto;
   padding: 10px;
   border-radius: 15px;

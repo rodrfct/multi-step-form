@@ -29,7 +29,8 @@ const props = defineProps({
 
 <style>
 #form {
-    padding: 0 13%;
+    position: relative;
+    margin: 0 13%;
     color: var(--Marine-blue);
 }
 
@@ -38,7 +39,9 @@ const props = defineProps({
     width: 100%;
     display: grid;
     grid-auto-flow: column;
-    margin-bottom: 5%;
+    
+    position: absolute;
+    bottom: 5%;
 }
 
 #forward-btn {
