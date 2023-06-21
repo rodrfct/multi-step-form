@@ -16,18 +16,18 @@
 
             <div class="plan advanced">
                 <img src="../assets/icons/icon-advanced.svg" alt="">
-                <label for="arcade">Advanced</label>
+                <label for="advanced">Advanced</label>
                 <p class="pricing">$12/mo</p>
 
-                <input type="radio" name="plan" value="advanced">
+                <input type="radio" name="plan" value="advanced" id="advanced">
             </div>
 
             <div class="plan pro">
                 <img src="../assets/icons/icon-pro.svg" alt="">
-                <label for="arcade">Pro</label>
+                <label for="pro">Pro</label>
                 <p class="pricing">$15/mo</p>
 
-                <input type="radio" name="plan" value="pro">
+                <input type="radio" name="plan" value="pro" id="pro">
             </div>
 
             <div class="periodicity">
