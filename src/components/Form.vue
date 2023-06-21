@@ -14,7 +14,7 @@ const props = defineProps({
 </script>
 
 <template>
-    <form>
+    <form id="form">
         <Step1 v-if="props.step == 1" />
         <Step2 v-else-if="props.step == 2" />
         <Step3 v-else-if="props.step == 3" />
@@ -27,14 +27,17 @@ const props = defineProps({
     </form>
 </template>
 
-<style scoped>
-form {
-    padding: 0 10%;
+<style>
+#form {
+    padding: 0 13%;
+    color: var(--Marine-blue);
 }
 
+/*Buttons */
 .step-switcher {
     width: 100%;
-    position: relative;
+    display: grid;
+    grid-auto-flow: column;
 }
 
 #forward-btn {
@@ -46,8 +49,7 @@ form {
     color: var(--White);
     font-weight: 700;
 
-    position: absolute;
-    right: 0;
+    justify-self: end;
 }
 
 #back-btn {
@@ -55,7 +57,23 @@ form {
     background-color: inherit;
     color: var(--Cool-gray);
 
-    position: absolute;
-    left: 0;
+    justify-self: start;
 }
+
+/*Actual form */
+#form fieldset {
+    border: none;
+    padding: 0;
+    margin: 8% 0 5% 0;
+}
+
+#form legend {
+    font-size: 1.6em;
+    font-weight: 700;
+}
+
+#form p {
+    color: var(--Cool-gray);
+}
+
 </style>
