@@ -38,6 +38,7 @@ const props = defineProps({
     width: 100%;
     display: grid;
     grid-auto-flow: column;
+    margin-bottom: 5%;
 }
 
 #forward-btn {
@@ -64,7 +65,7 @@ const props = defineProps({
 #form fieldset {
     border: none;
     padding: 0;
-    margin: 8% 0 5% 0;
+    margin: 8% 0 8% 0;
 }
 
 #form legend {

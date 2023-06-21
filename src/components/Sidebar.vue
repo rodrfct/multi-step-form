@@ -123,7 +123,7 @@ const bgImage = computed(() => {
 }
 
 .active .number {
-    background-color: var(--Pastel-blue);
+    background-color: var(--Light-blue);
     color: var(--Marine-blue);
     border-color: var(--Pastel-blue);
 }
