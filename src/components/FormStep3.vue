@@ -8,7 +8,9 @@
         <div class="addons-selector">
 
             <div class="addon">
-                <input type="checkbox" value="online-service" id="online">
+                <div class="checkbox">
+                    <input type="checkbox" value="online-service" id="online">
+                </div>
                 
                 <div class="text">
                     <label for="online">Online service</label>
@@ -19,7 +21,9 @@
             </div>
 
             <div class="addon">
-                <input type="checkbox" value="larger-storage" id="storage">
+                <div class="checkbox">
+                    <input type="checkbox" value="larger-storage" id="storage">
+                </div>
                 
                 <div class="text">
                     <label for="storage">Larger storage</label>
@@ -30,8 +34,10 @@
             </div>
 
             <div class="addon">
-                <input type="checkbox" value="customizable-profile" id="customizable">
-                
+                <div class="checkbox">
+                    <input type="checkbox" value="customizable-profile" id="customizable">
+                </div>
+
                 <div class="text">
                     <label for="customizable">Customizable profile</label>
                     <p>Custom theme on your profile</p>
@@ -60,6 +66,8 @@
     grid-template-columns: auto 1fr auto;
     gap: 5%;
     align-items: center;
+
+    position: relative;
 }
 
 .addon label {
@@ -79,17 +87,30 @@
     background-color: var(--Almost-transparent-purplish-blue);
 }
 
-.addon input:checked {
-    appearance: none;
+.checkbox {
     width: 15px;
     height: 15px;
 
+    border: 1px solid var(--Light-gray);
+    border-radius: 3px;
+}
+
+.checkbox:has(input:checked) {
     background-color: var(--Purplish-blue);
     background-image: url('../assets/icons/icon-checkmark.svg');
     background-repeat: no-repeat;
     background-size: 70%;
     background-position: 3px 3px;
-    padding: 5px;
-    border-radius: 3px;
+}
+
+.checkbox input {
+    appearance: none;
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+
+    margin: 0;
 }
 </style>
