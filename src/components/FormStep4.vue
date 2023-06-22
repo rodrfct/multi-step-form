@@ -9,7 +9,7 @@
             <div class="item plan">
                 <div class="selection">
                     <span>Arcade (Monthly)</span>
-                    <p>Change</p>
+                    <p @click="$emit('select-step', 2)">Change</p>
                 </div>
 
                 <span class="price">$9/mo</span>

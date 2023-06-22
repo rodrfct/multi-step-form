@@ -14,7 +14,8 @@ const step =ref<number>(1)
 
   <Form :step="step"
   @stepBack="() => {if (step > 1) {step--}}" 
-  @stepForward="() => {if (step < 4) {step++}}" />
+  @stepForward="() => {if (step < 4) {step++}}"
+  @selectStep="(selectedStep) => {if (selectedStep >= 1 && selectedStep <= 4) {step = selectedStep}}" />
 </div>
 </template>
 
