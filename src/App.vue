@@ -2,8 +2,11 @@
 import { ref } from 'vue';
 import Sidebar from './components/Sidebar.vue'
 import Form from './components/Form.vue'
+import ThankYou from './components/ThankYou.vue'
 
-const step =ref<number>(1)
+const step = ref<number>(1)
+
+const isSubmitted = ref<boolean>(false)
 
 </script>
 
@@ -12,10 +15,13 @@ const step =ref<number>(1)
   <Sidebar :step="step"
   @selectStep="(selectedStep) => {if (selectedStep >= 1 && selectedStep <= 4) {step = selectedStep}}" />
 
-  <Form :step="step"
+  <Form v-if="!isSubmitted" :step="step"
   @stepBack="() => {if (step > 1) {step--}}" 
   @stepForward="() => {if (step < 4) {step++}}"
-  @selectStep="(selectedStep) => {if (selectedStep >= 1 && selectedStep <= 4) {step = selectedStep}}" />
+  @selectStep="(selectedStep) => {if (selectedStep >= 1 && selectedStep <= 4) {step = selectedStep}}"
+  @submit.prevent="() => {isSubmitted = true}" />
+
+  <ThankYou v-else />
 </div>
 </template>
 

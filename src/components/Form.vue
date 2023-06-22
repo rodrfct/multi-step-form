@@ -24,7 +24,7 @@ const props = defineProps({
         <div class="step-switcher">
             <button v-show="props.step > 1" @click="$emit('step-back')" type="button" id="back-btn">Go Back</button>
             <button v-show="props.step < 4" @click="$emit('step-forward')" type="button" id="forward-btn">Next Step</button>
-            <button v-show="props.step == 4" @click="$emit('confirm')" type="button" id="confirm-btn">Confirm</button>
+            <button v-show="props.step == 4" type="submit" id="confirm-btn">Confirm</button>
         </div>
     </form>
 </template>
