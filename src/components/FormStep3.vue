@@ -9,7 +9,7 @@
 
             <div class="addon">
                 <div class="checkbox">
-                    <input type="checkbox" value="online-service" id="online">
+                    <input type="checkbox" name="online-service" id="online">
                 </div>
                 
                 <div class="text">
@@ -22,7 +22,7 @@
 
             <div class="addon">
                 <div class="checkbox">
-                    <input type="checkbox" value="larger-storage" id="storage">
+                    <input type="checkbox" name="larger-storage" id="storage">
                 </div>
                 
                 <div class="text">
@@ -35,7 +35,7 @@
 
             <div class="addon">
                 <div class="checkbox">
-                    <input type="checkbox" value="customizable-profile" id="customizable">
+                    <input type="checkbox" name="customizable-profile" id="customizable">
                 </div>
 
                 <div class="text">

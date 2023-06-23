@@ -34,7 +34,7 @@
                 <span>Monthly</span>
 
                 <label class="switch">
-                    <input type="checkbox">
+                    <input type="checkbox" name="periodicity">
                     <span class="slider"></span>
                 </label>
                 

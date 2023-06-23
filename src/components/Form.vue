@@ -1,4 +1,5 @@
 <script setup lang="ts">
+import { ref } from 'vue';
 import Step1 from './FormStep1.vue'
 import Step2 from './FormStep2.vue'
 import Step3 from './FormStep3.vue'
@@ -11,20 +12,40 @@ const props = defineProps({
     }
 })
 
+const form = ref<HTMLFormElement | null>(null)
+
+function getFormValue() {
+        return {
+        name: form.value?.elements.name.value,
+        email: form.value?.elements.email.value,
+        phone: form.value?.elements.phone.value,
+        plan: form.value?.elements.plan.value,
+        periodicity: form.value?.elements.periodicity.checked,
+        onlineService: form.value?.elements.online.checked,
+        largerStorage: form.value?.elements.storage.checked,
+        customizableProfile: form.value?.elements.customizable.checked
+    }
+}
+
+function submitForm() {
+    console.log(getFormValue())
+}
+
 </script>
 
 <template>
-    <form id="form">
-        <Step1 v-if="props.step == 1" />
-        <Step2 v-else-if="props.step == 2" />
-        <Step3 v-else-if="props.step == 3" />
-        <Step4 v-else-if="props.step == 4"
+    <form ref="form" id="form">
+        <Step1 v-show="props.step == 1" />
+        <Step2 v-show="props.step == 2" />
+        <Step3 v-show="props.step == 3" />
+        <Step4 v-show="props.step == 4"
         @selectStep="(selectedStep) => {$emit('select-step', selectedStep)}" />
     
         <div class="step-switcher">
             <button v-show="props.step > 1" @click="$emit('step-back')" type="button" id="back-btn">Go Back</button>
             <button v-show="props.step < 4" @click="$emit('step-forward')" type="button" id="forward-btn">Next Step</button>
-            <button v-show="props.step == 4" type="submit" id="confirm-btn">Confirm</button>
+            <button v-show="props.step == 4" type="button" id="confirm-btn"
+            @click="submitForm">Confirm</button>
         </div>
     </form>
 </template>
