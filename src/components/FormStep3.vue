@@ -3,7 +3,8 @@ defineProps({
     addonsPricing: {
         type: Object,
         required: true
-    }
+    },
+    yearlyPlan: Boolean
 })
 </script>
 
@@ -24,7 +25,7 @@ defineProps({
                     <p>Access to multiplayer games</p>
                 </div>
 
-                <span>{{`+$${addonsPricing.onlineService.monthly}/mo`}}</span>
+                <span>{{ yearlyPlan ? `+$${addonsPricing.onlineService.yearly}/yr` : `+$${addonsPricing.onlineService.monthly}/mo` }}</span>
             </div>
 
             <div class="addon">
@@ -37,7 +38,7 @@ defineProps({
                     <p>Extra 1TB of cloud save</p>
                 </div>
 
-                <span>{{`+$${addonsPricing.largerStorage.monthly}/mo`}}</span>
+                <span>{{ yearlyPlan ? `+$${addonsPricing.largerStorage.yearly}/yr` : `+$${addonsPricing.largerStorage.monthly}/mo` }}</span>
             </div>
 
             <div class="addon">
@@ -50,7 +51,7 @@ defineProps({
                     <p>Custom theme on your profile</p>
                 </div>
 
-                <span>{{`+$${addonsPricing.customizableProfile.monthly}/mo`}}</span>
+                <span>{{ yearlyPlan ? `+$${addonsPricing.customizableProfile.yearly}/yr` : `+$${addonsPricing.customizableProfile.monthly}/mo` }}</span>
             </div>
 
         </div>

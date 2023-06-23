@@ -1,8 +1,22 @@
 <script setup lang="ts">
-defineProps({
+import { computed } from 'vue';
+
+const props = defineProps({
     planPricing: {
         type: Object,
         required: true
+    },
+    yearlyPlan: Boolean
+})
+
+const emit = defineEmits(['periodicity-change'])
+
+const yearly = computed({
+    get() {
+        return props.yearlyPlan
+    },
+    set(newValue) {
+        emit('periodicity-change', newValue)
     }
 })
 </script>
@@ -16,7 +30,8 @@ defineProps({
             <div class="plan arcade">
                 <img src="../assets/icons/icon-arcade.svg" alt="">
                 <label for="arcade">Arcade</label>
-                <p class="pricing">{{`$${planPricing.arcade.monthly}/mo`}}</p>
+                <p class="pricing">{{ yearlyPlan ? `$${planPricing.arcade.yearly}/yr` : `$${planPricing.arcade.monthly}/mo`}}</p>
+                <p v-if="yearlyPlan" class="discount">2 months free</p>
 
                 <input type="radio" name="plan" value="arcade" id="arcade" checked>
             </div>
@@ -24,7 +39,8 @@ defineProps({
             <div class="plan advanced">
                 <img src="../assets/icons/icon-advanced.svg" alt="">
                 <label for="advanced">Advanced</label>
-                <p class="pricing">{{`$${planPricing.advanced.monthly}/mo`}}</p>
+                <p class="pricing">{{ yearlyPlan ? `$${planPricing.advanced.yearly}/yr` : `$${planPricing.advanced.monthly}/mo`}}</p>
+                <p v-if="yearlyPlan" class="discount">2 months free</p>
 
                 <input type="radio" name="plan" value="advanced" id="advanced">
             </div>
@@ -32,7 +48,8 @@ defineProps({
             <div class="plan pro">
                 <img src="../assets/icons/icon-pro.svg" alt="">
                 <label for="pro">Pro</label>
-                <p class="pricing">{{`$${planPricing.pro.monthly}/mo`}}</p>
+                <p class="pricing">{{ yearlyPlan ? `$${planPricing.pro.yearly}/yr` : `$${planPricing.pro.monthly}/mo`}}</p>
+                <p v-if="yearlyPlan" class="discount">2 months free</p>
 
                 <input type="radio" name="plan" value="pro" id="pro">
             </div>
@@ -41,7 +58,7 @@ defineProps({
                 <span>Monthly</span>
 
                 <label class="switch">
-                    <input type="checkbox" name="periodicity">
+                    <input v-model="yearly" type="checkbox" name="periodicity">
                     <span class="slider"></span>
                 </label>
                 
@@ -81,6 +98,11 @@ defineProps({
     margin: 3px 0 0 0;
     font-size: .9em;
 }
+
+.plan .discount {
+    color: var(--Marine-blue) !important;
+    font-size: .75em;
+} 
 
 .plan input {
     appearance: none;

@@ -44,6 +44,8 @@ const addonsPricing = {
     }
 }
 
+const yearlyPlan = ref<boolean>(false)
+
 const form = ref<HTMLFormElement | null>(null)
 
 function getFormValue() {
@@ -76,8 +78,13 @@ function submitForm() {
 <template>
     <form ref="form" id="form">
         <Step1 v-show="props.step == 1" />
-        <Step2 v-show="props.step == 2" :planPricing="planPricing" />
-        <Step3 v-show="props.step == 3" :addonsPricing="addonsPricing" />
+
+        <Step2 v-show="props.step == 2" :planPricing="planPricing"
+        :yearlyPlan="yearlyPlan"
+        @periodicityChange="(val: boolean) => {yearlyPlan = val}" />
+
+        <Step3 v-show="props.step == 3" :addonsPricing="addonsPricing" :yearlyPlan="yearlyPlan" />
+        
         <Step4 v-show="props.step == 4"
         @selectStep="(selectedStep) => {$emit('select-step', selectedStep)}" />
     
