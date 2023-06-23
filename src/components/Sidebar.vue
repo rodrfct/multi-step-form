@@ -10,6 +10,8 @@ const props = defineProps({
     }
 })
 
+defineEmits(['select-step'])
+
 const bgImage = computed(() => {
     if (window.innerWidth > 420) {
         return bgDesktop

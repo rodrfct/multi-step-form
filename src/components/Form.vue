@@ -12,6 +12,8 @@ const props = defineProps({
     }
 })
 
+defineEmits(['step-back', 'step-forward', 'select-step'])
+
 const form = ref<HTMLFormElement | null>(null)
 
 function getFormValue() {
