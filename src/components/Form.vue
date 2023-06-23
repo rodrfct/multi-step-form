@@ -14,17 +14,55 @@ const props = defineProps({
 
 defineEmits(['step-back', 'step-forward', 'select-step'])
 
+const planPricing = {
+    arcade: {
+        monthly: 9,
+        yearly: 90
+    },
+    advanced: {
+        monthly: 12,
+        yearly: 120
+    },
+    pro: {
+        monthly: 15,
+        yearly: 150
+    }
+}
+
+const addonsPricing = {
+    onlineService: {
+        monthly: 1,
+        yearly: 10
+    },
+    largerStorage: {
+        monthly: 2,
+        yearly: 20
+    },
+    customizableProfile: {
+        monthly: 2,
+        yearly: 20
+    }
+}
+
 const form = ref<HTMLFormElement | null>(null)
 
 function getFormValue() {
-        return {
+    return {
+        // @ts-expect-error
         name: form.value?.elements.name.value,
+        // @ts-expect-error
         email: form.value?.elements.email.value,
+        // @ts-expect-error
         phone: form.value?.elements.phone.value,
+        // @ts-expect-error
         plan: form.value?.elements.plan.value,
+        // @ts-expect-error
         periodicity: form.value?.elements.periodicity.checked,
+        // @ts-expect-error
         onlineService: form.value?.elements.online.checked,
+        // @ts-expect-error
         largerStorage: form.value?.elements.storage.checked,
+        // @ts-expect-error
         customizableProfile: form.value?.elements.customizable.checked
     }
 }
@@ -38,8 +76,8 @@ function submitForm() {
 <template>
     <form ref="form" id="form">
         <Step1 v-show="props.step == 1" />
-        <Step2 v-show="props.step == 2" />
-        <Step3 v-show="props.step == 3" />
+        <Step2 v-show="props.step == 2" :planPricing="planPricing" />
+        <Step3 v-show="props.step == 3" :addonsPricing="addonsPricing" />
         <Step4 v-show="props.step == 4"
         @selectStep="(selectedStep) => {$emit('select-step', selectedStep)}" />
     

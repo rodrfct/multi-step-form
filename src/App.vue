@@ -13,12 +13,12 @@ const isSubmitted = ref<boolean>(false)
 <template>
 <div class="wrapper">
   <Sidebar :step="step"
-  @selectStep="(selectedStep) => {if (selectedStep >= 1 && selectedStep <= 4) {step = selectedStep}}" />
+  @selectStep="(selectedStep: number) => {if (selectedStep >= 1 && selectedStep <= 4) {step = selectedStep}}" />
 
   <Form v-if="!isSubmitted" :step="step"
   @stepBack="() => {if (step > 1) {step--}}" 
   @stepForward="() => {if (step < 4) {step++}}"
-  @selectStep="(selectedStep) => {if (selectedStep >= 1 && selectedStep <= 4) {step = selectedStep}}"
+  @selectStep="(selectedStep: number) => {if (selectedStep >= 1 && selectedStep <= 4) {step = selectedStep}}"
   @submit.prevent="() => {isSubmitted = true}" />
 
   <ThankYou v-else />

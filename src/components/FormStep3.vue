@@ -1,4 +1,11 @@
-<script setup lang="ts"></script>
+<script setup lang="ts">
+defineProps({
+    addonsPricing: {
+        type: Object,
+        required: true
+    }
+})
+</script>
 
 <template>
     <fieldset>
@@ -17,7 +24,7 @@
                     <p>Access to multiplayer games</p>
                 </div>
 
-                <span>+$1/mo</span>
+                <span>{{`+$${addonsPricing.onlineService.monthly}/mo`}}</span>
             </div>
 
             <div class="addon">
@@ -30,7 +37,7 @@
                     <p>Extra 1TB of cloud save</p>
                 </div>
 
-                <span>+$1/mo</span>
+                <span>{{`+$${addonsPricing.largerStorage.monthly}/mo`}}</span>
             </div>
 
             <div class="addon">
@@ -43,7 +50,7 @@
                     <p>Custom theme on your profile</p>
                 </div>
 
-                <span>+$1/mo</span>
+                <span>{{`+$${addonsPricing.customizableProfile.monthly}/mo`}}</span>
             </div>
 
         </div>

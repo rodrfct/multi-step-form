@@ -1,4 +1,11 @@
-<script setup lang="ts"></script>
+<script setup lang="ts">
+defineProps({
+    planPricing: {
+        type: Object,
+        required: true
+    }
+})
+</script>
 
 <template>
     <fieldset>
@@ -9,7 +16,7 @@
             <div class="plan arcade">
                 <img src="../assets/icons/icon-arcade.svg" alt="">
                 <label for="arcade">Arcade</label>
-                <p class="pricing">$9/mo</p>
+                <p class="pricing">{{`$${planPricing.arcade.monthly}/mo`}}</p>
 
                 <input type="radio" name="plan" value="arcade" id="arcade" checked>
             </div>
@@ -17,7 +24,7 @@
             <div class="plan advanced">
                 <img src="../assets/icons/icon-advanced.svg" alt="">
                 <label for="advanced">Advanced</label>
-                <p class="pricing">$12/mo</p>
+                <p class="pricing">{{`$${planPricing.advanced.monthly}/mo`}}</p>
 
                 <input type="radio" name="plan" value="advanced" id="advanced">
             </div>
@@ -25,7 +32,7 @@
             <div class="plan pro">
                 <img src="../assets/icons/icon-pro.svg" alt="">
                 <label for="pro">Pro</label>
-                <p class="pricing">$15/mo</p>
+                <p class="pricing">{{`$${planPricing.pro.monthly}/mo`}}</p>
 
                 <input type="radio" name="plan" value="pro" id="pro">
             </div>
