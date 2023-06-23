@@ -1,4 +1,67 @@
-<script setup lang="ts"></script>
+<script setup lang="ts">
+import { computed } from 'vue';
+
+const props = defineProps({
+    planPricing: {
+        type: Object,
+        required: true
+    },
+    addonsPricing: {
+        type: Object,
+        required: true
+    },
+    selections: {
+        type: Object,
+        required: true
+    }
+})
+
+const total = computed((): number => {
+    let base
+
+    if (props.selections.plan == "pro") {
+        base = props.planPricing.pro[props.selections.periodicity]
+    }
+
+    if (props.selections.plan == "advanced") {
+        base = props.planPricing.advanced[props.selections.periodicity]
+    }
+
+    if (props.selections.plan == "arcade") {
+        base = props.planPricing.arcade[props.selections.periodicity]
+    }
+
+    if (props.selections.onlineService) {
+        base += props.addonsPricing.onlineService[props.selections.periodicity]
+    }
+
+    if (props.selections.largerStorage) {
+        base += props.addonsPricing.largerStorage[props.selections.periodicity]
+    }
+
+    if (props.selections.customizableProfile) {
+        base += props.addonsPricing.customizableProfile[props.selections.periodicity]
+    }
+
+    return base
+})
+
+const planPrice = computed(() => {
+    if (props.selections.plan == "pro") {
+        return `$${props.planPricing.pro[props.selections.periodicity]}/${periodicityAbbreviated.value}`
+    }
+
+    if (props.selections.plan == "advanced") {
+        return `$${props.planPricing.advanced[props.selections.periodicity]}/${periodicityAbbreviated.value}`
+    }
+
+    if (props.selections.plan == "arcade") {
+        return `$${props.planPricing.arcade[props.selections.periodicity]}/${periodicityAbbreviated.value}`
+    }
+})
+
+const periodicityAbbreviated = computed(() => props.selections.periodicity == "yearly" ? "yr" : "mo")
+</script>
 
 <template>
     <fieldset>
@@ -8,26 +71,34 @@
         <div class="summary">
             <div class="item plan">
                 <div class="selection">
-                    <span>Arcade (Monthly)</span>
+                    <span>{{ selections.plan }} ({{ selections.periodicity }})</span>
                     <p @click="$emit('select-step', 2)">Change</p>
                 </div>
 
-                <span class="price">$9/mo</span>
+                <span class="price">{{ planPrice }}</span>
             </div>
-            <div class="item">
+
+            <div v-if="selections.onlineService" class="item">
                 <p>Online service</p>
-                <span class="price">+$1/mo</span>
+                <span class="price">{{ `+$${addonsPricing.onlineService[selections.periodicity]}/${periodicityAbbreviated}` }}</span>
             </div>
-            <div class="item">
+
+            <div v-if="selections.largerStorage" class="item">
                 <p>Larger storage</p>
-                <span class="price">+$2/mo</span>
+                <span class="price">{{ `+$${addonsPricing.largerStorage[selections.periodicity]}/${periodicityAbbreviated}` }}</span>
             </div>
+
+            <div v-if="selections.customizableProfile" class="item">
+                <p>Customizable profile</p>
+                <span class="price">{{ `+$${addonsPricing.customizableProfile[selections.periodicity]}/${periodicityAbbreviated}` }}</span>
+            </div>
+
         </div>
 
         <div class="item total">
-            <p>Total (per month)</p>
+            <p>Total (per {{ selections.periodicity == "yearly" ? "year" : "month" }})</p>
 
-            <span class="price">+$12/mo</span>
+            <span class="price">{{ `+$${total}/${periodicityAbbreviated}` }}</span>
         </div>
     </fieldset>
 </template>
@@ -65,6 +136,7 @@
 
 .selection span {
     font-weight: 500;
+    text-transform: capitalize;
 }
 
 .selection p {

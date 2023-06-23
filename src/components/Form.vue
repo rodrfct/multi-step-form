@@ -59,7 +59,7 @@ function getFormValue() {
         // @ts-expect-error
         plan: form.value?.elements.plan.value,
         // @ts-expect-error
-        periodicity: form.value?.elements.periodicity.checked,
+        periodicity: form.value?.elements.periodicity.checked ? "yearly" : "monthly",
         // @ts-expect-error
         onlineService: form.value?.elements.online.checked,
         // @ts-expect-error
@@ -84,8 +84,11 @@ function submitForm() {
         @periodicityChange="(val: boolean) => {yearlyPlan = val}" />
 
         <Step3 v-show="props.step == 3" :addonsPricing="addonsPricing" :yearlyPlan="yearlyPlan" />
-        
+
         <Step4 v-show="props.step == 4"
+        :selections="getFormValue()"
+        :planPricing="planPricing"
+        :addonsPricing="addonsPricing"
         @selectStep="(selectedStep) => {$emit('select-step', selectedStep)}" />
     
         <div class="step-switcher">
