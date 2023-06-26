@@ -19,18 +19,18 @@ const props = defineProps({
 const total = computed((): number => {
     let base
 
+    // Determine the chosen plan (props.planPricing[props.selections.plan] would be much cleaner but doesn't work)
     if (props.selections.plan == "pro") {
         base = props.planPricing.pro[props.selections.periodicity]
-    }
-
-    if (props.selections.plan == "advanced") {
+    
+    } else if (props.selections.plan == "advanced") {
         base = props.planPricing.advanced[props.selections.periodicity]
-    }
-
-    if (props.selections.plan == "arcade") {
+    
+    } else if (props.selections.plan == "arcade") {
         base = props.planPricing.arcade[props.selections.periodicity]
     }
 
+    // Add the price of the selected add-ons
     if (props.selections.onlineService) {
         base += props.addonsPricing.onlineService[props.selections.periodicity]
     }
@@ -49,13 +49,11 @@ const total = computed((): number => {
 const planPrice = computed(() => {
     if (props.selections.plan == "pro") {
         return `$${props.planPricing.pro[props.selections.periodicity]}/${periodicityAbbreviated.value}`
-    }
-
-    if (props.selections.plan == "advanced") {
+    
+    } else if (props.selections.plan == "advanced") {
         return `$${props.planPricing.advanced[props.selections.periodicity]}/${periodicityAbbreviated.value}`
-    }
-
-    if (props.selections.plan == "arcade") {
+    
+    } else if (props.selections.plan == "arcade") {
         return `$${props.planPricing.arcade[props.selections.periodicity]}/${periodicityAbbreviated.value}`
     }
 })
