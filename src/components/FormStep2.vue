@@ -1,22 +1,45 @@
 <script setup lang="ts">
 import { computed } from 'vue';
+import type { planPricingInterface, Periodicity, Plan } from './Form.vue';
 
-const props = defineProps({
-    planPricing: {
-        type: Object,
-        required: true
-    },
-    yearlyPlan: Boolean
-})
+const props = defineProps<{
+    planPricing: planPricingInterface,
+    selectedPlan: Plan,
+    yearlyPlan: Periodicity
+}>()
 
-const emit = defineEmits(['periodicity-change'])
+const emit = defineEmits(['periodicity-change', 'plan-change'])
 
 const yearly = computed({
-    get() {
-        return props.yearlyPlan
+    // Return value needs to be a boolean for v-model to work on the checkbox
+    get(): boolean {
+        return props.yearlyPlan == "yearly"
     },
     set(newValue) {
         emit('periodicity-change', newValue)
+    }
+})
+
+const plan = computed({
+    get(): Plan {
+        return props.selectedPlan
+    },
+    set(newValue: Plan) {
+        emit('plan-change', newValue)
+    }
+})
+
+const periodicityHighlight = computed(() => {
+    if (props.yearlyPlan == "yearly") {
+        return {
+            yearlyColor: "var(--Marine-blue)",
+            monthlyColor: "var(--Cool-gray)"
+        }
+    } else if (props.yearlyPlan == "monthly") {
+        return {
+            yearlyColor: "var(--Cool-gray)",
+            monthlyColor: "var(--Marine-blue)"
+        }
     }
 })
 </script>
@@ -30,39 +53,39 @@ const yearly = computed({
             <div class="plan arcade">
                 <img src="../assets/icons/icon-arcade.svg" alt="">
                 <label for="arcade">Arcade</label>
-                <p class="pricing">{{ yearlyPlan ? `$${planPricing.arcade.yearly}/yr` : `$${planPricing.arcade.monthly}/mo`}}</p>
-                <p v-if="yearlyPlan" class="discount">2 months free</p>
+                <p class="pricing">{{ yearlyPlan == "yearly" ? `$${planPricing.arcade.yearly}/yr` : `$${planPricing.arcade.monthly}/mo`}}</p>
+                <p v-if="yearlyPlan == 'yearly'" class="discount">2 months free</p>
 
-                <input type="radio" name="plan" value="arcade" id="arcade" checked>
+                <input type="radio" v-model="plan" name="plan" value="arcade" id="arcade" checked>
             </div>
 
             <div class="plan advanced">
                 <img src="../assets/icons/icon-advanced.svg" alt="">
                 <label for="advanced">Advanced</label>
-                <p class="pricing">{{ yearlyPlan ? `$${planPricing.advanced.yearly}/yr` : `$${planPricing.advanced.monthly}/mo`}}</p>
-                <p v-if="yearlyPlan" class="discount">2 months free</p>
+                <p class="pricing">{{ yearlyPlan == "yearly" ? `$${planPricing.advanced.yearly}/yr` : `$${planPricing.advanced.monthly}/mo`}}</p>
+                <p v-if="yearlyPlan == 'yearly'" class="discount">2 months free</p>
 
-                <input type="radio" name="plan" value="advanced" id="advanced">
+                <input type="radio" v-model="plan" name="plan" value="advanced" id="advanced">
             </div>
 
             <div class="plan pro">
                 <img src="../assets/icons/icon-pro.svg" alt="">
                 <label for="pro">Pro</label>
-                <p class="pricing">{{ yearlyPlan ? `$${planPricing.pro.yearly}/yr` : `$${planPricing.pro.monthly}/mo`}}</p>
-                <p v-if="yearlyPlan" class="discount">2 months free</p>
+                <p class="pricing">{{ yearlyPlan == "yearly" ? `$${planPricing.pro.yearly}/yr` : `$${planPricing.pro.monthly}/mo`}}</p>
+                <p v-if="yearlyPlan == 'yearly'" class="discount">2 months free</p>
 
-                <input type="radio" name="plan" value="pro" id="pro">
+                <input type="radio" v-model="plan" name="plan" value="pro" id="pro">
             </div>
 
             <div class="periodicity">
-                <span>Monthly</span>
+                <span id="monthly">Monthly</span>
 
                 <label class="switch">
                     <input v-model="yearly" type="checkbox" name="periodicity">
                     <span class="slider"></span>
                 </label>
                 
-                <span>Yearly</span>
+                <span id="yearly">Yearly</span>
             </div>
         </div>
     </fieldset>
@@ -117,6 +140,14 @@ const yearly = computed({
 .plan:has(input:checked) {
     border-color: var(--Purplish-blue);
     background-color: var(--Almost-transparent-purplish-blue);
+}
+
+#monthly {
+    color: v-bind(periodicityHighlight?.monthlyColor);
+}
+
+#yearly {
+    color: v-bind(periodicityHighlight?.yearlyColor);
 }
 
 /*Switch*/
@@ -174,7 +205,7 @@ const yearly = computed({
   border-radius: 50%;
 }
 
-input:checked + .slider {
+input + .slider {
   background-color: var(--Marine-blue);
 }
 

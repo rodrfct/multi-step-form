@@ -1,23 +1,15 @@
 <script setup lang="ts">
 import { computed } from 'vue';
+import type { selectionsInterface, planPricingInterface, addonsPricingInterface } from './Form.vue';
 
-const props = defineProps({
-    planPricing: {
-        type: Object,
-        required: true
-    },
-    addonsPricing: {
-        type: Object,
-        required: true
-    },
-    selections: {
-        type: Object,
-        required: true
-    }
-})
+const props = defineProps<{
+    planPricing: planPricingInterface,
+    addonsPricing: addonsPricingInterface,
+    selections: selectionsInterface
+}>()
 
 const total = computed((): number => {
-    let base
+    let base: number = 0
 
     // Determine the chosen plan (props.planPricing[props.selections.plan] would be much cleaner but doesn't work)
     if (props.selections.plan == "pro") {
@@ -31,15 +23,15 @@ const total = computed((): number => {
     }
 
     // Add the price of the selected add-ons
-    if (props.selections.onlineService) {
+    if (props.selections.addons.onlineService) {
         base += props.addonsPricing.onlineService[props.selections.periodicity]
     }
 
-    if (props.selections.largerStorage) {
+    if (props.selections.addons.largerStorage) {
         base += props.addonsPricing.largerStorage[props.selections.periodicity]
     }
 
-    if (props.selections.customizableProfile) {
+    if (props.selections.addons.customizableProfile) {
         base += props.addonsPricing.customizableProfile[props.selections.periodicity]
     }
 
@@ -76,17 +68,17 @@ const periodicityAbbreviated = computed(() => props.selections.periodicity == "y
                 <span class="price">{{ planPrice }}</span>
             </div>
 
-            <div v-if="selections.onlineService" class="item">
+            <div v-if="selections.addons.onlineService" class="item">
                 <p>Online service</p>
                 <span class="price">{{ `+$${addonsPricing.onlineService[selections.periodicity]}/${periodicityAbbreviated}` }}</span>
             </div>
 
-            <div v-if="selections.largerStorage" class="item">
+            <div v-if="selections.addons.largerStorage" class="item">
                 <p>Larger storage</p>
                 <span class="price">{{ `+$${addonsPricing.largerStorage[selections.periodicity]}/${periodicityAbbreviated}` }}</span>
             </div>
 
-            <div v-if="selections.customizableProfile" class="item">
+            <div v-if="selections.addons.customizableProfile" class="item">
                 <p>Customizable profile</p>
                 <span class="price">{{ `+$${addonsPricing.customizableProfile[selections.periodicity]}/${periodicityAbbreviated}` }}</span>
             </div>

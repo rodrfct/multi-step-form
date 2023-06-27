@@ -1,10 +1,39 @@
 <script setup lang="ts">
-defineProps({
-    addonsPricing: {
-        type: Object,
-        required: true
+import { computed } from 'vue';
+import type { addonsPricingInterface, addonsInterface, Periodicity } from './Form.vue';
+
+const props = defineProps<{
+    addonsPricing: addonsPricingInterface,
+    seletedAddons: addonsInterface,
+    yearlyPlan: Periodicity
+}>()
+
+const emit = defineEmits(['onlineService-change', 'largerStorage-change', 'customizableProfile-change'])
+
+const onlineService = computed({
+    get() {
+        return props.seletedAddons?.onlineService
     },
-    yearlyPlan: Boolean
+    set(newValue) {
+        emit('onlineService-change', newValue)
+    }
+})
+
+const largerStorage = computed({
+    get() {
+        return props.seletedAddons?.largerStorage
+    },
+    set(newValue) {
+        emit('largerStorage-change', newValue)
+    }
+})
+const customizableProfile = computed({
+    get() {
+        return props.seletedAddons?.customizableProfile
+    },
+    set(newValue) {
+        emit('customizableProfile-change', newValue)
+    }
 })
 </script>
 
@@ -17,7 +46,7 @@ defineProps({
 
             <div class="addon">
                 <div class="checkbox">
-                    <input type="checkbox" name="online-service" id="online">
+                    <input type="checkbox" v-model="onlineService" name="online-service" id="online">
                 </div>
                 
                 <div class="text">
@@ -25,12 +54,12 @@ defineProps({
                     <p>Access to multiplayer games</p>
                 </div>
 
-                <span>{{ yearlyPlan ? `+$${addonsPricing.onlineService.yearly}/yr` : `+$${addonsPricing.onlineService.monthly}/mo` }}</span>
+                <span>{{ yearlyPlan == "yearly" ? `+$${addonsPricing.onlineService.yearly}/yr` : `+$${addonsPricing.onlineService.monthly}/mo` }}</span>
             </div>
 
             <div class="addon">
                 <div class="checkbox">
-                    <input type="checkbox" name="larger-storage" id="storage">
+                    <input type="checkbox" v-model="largerStorage" name="larger-storage" id="storage">
                 </div>
                 
                 <div class="text">
@@ -38,12 +67,12 @@ defineProps({
                     <p>Extra 1TB of cloud save</p>
                 </div>
 
-                <span>{{ yearlyPlan ? `+$${addonsPricing.largerStorage.yearly}/yr` : `+$${addonsPricing.largerStorage.monthly}/mo` }}</span>
+                <span>{{ yearlyPlan == "yearly" ? `+$${addonsPricing.largerStorage.yearly}/yr` : `+$${addonsPricing.largerStorage.monthly}/mo` }}</span>
             </div>
 
             <div class="addon">
                 <div class="checkbox">
-                    <input type="checkbox" name="customizable-profile" id="customizable">
+                    <input type="checkbox" v-model="customizableProfile" name="customizable-profile" id="customizable">
                 </div>
 
                 <div class="text">
@@ -51,7 +80,7 @@ defineProps({
                     <p>Custom theme on your profile</p>
                 </div>
 
-                <span>{{ yearlyPlan ? `+$${addonsPricing.customizableProfile.yearly}/yr` : `+$${addonsPricing.customizableProfile.monthly}/mo` }}</span>
+                <span>{{ yearlyPlan == "yearly" ? `+$${addonsPricing.customizableProfile.yearly}/yr` : `+$${addonsPricing.customizableProfile.monthly}/mo` }}</span>
             </div>
 
         </div>
