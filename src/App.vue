@@ -28,8 +28,8 @@ const isSubmitted = ref<boolean>(false)
 <style scoped>
 .wrapper {
   background-color: var(--Alabaster);
-  width: 85%;
-  height: 550px;
+  max-width: 70%;
+  min-height: 60vh;
   margin: auto;
   padding: 13px;
   border-radius: 15px;

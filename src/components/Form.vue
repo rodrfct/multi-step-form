@@ -166,6 +166,7 @@ function submitForm() {
 #form {
     position: relative;
     margin: 0 13%;
+    padding-bottom: 20%;
     color: var(--Marine-blue);
 }
 
@@ -183,14 +184,23 @@ function submitForm() {
     border: none;
     border-radius: 6px;
     padding: .7em 1.5em;
+    font-weight: 700;
+}
+
+.step-switcher button:hover {
+    cursor: pointer;
 }
 
 #forward-btn {
     background-color: var(--Marine-blue);
     color: var(--White);
-    font-weight: 700;
+    transition: filter .3s ease;
 
     justify-self: end;
+}
+
+#forward-btn:hover, #confirm-btn:hover {
+    filter: brightness(150%);
 }
 
 #back-btn {
@@ -201,11 +211,17 @@ function submitForm() {
     justify-self: start;
 }
 
+#back-btn:hover {
+    color: var(--Marine-blue);
+}
+
 #confirm-btn {
     background-color: var(--Purplish-blue);
     color: var(--White);
     font-weight: 700;
     justify-self: end;
+
+    transition: filter .5s ease;
 }
 
 /*Actual form */

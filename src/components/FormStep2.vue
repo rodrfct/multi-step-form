@@ -135,11 +135,17 @@ const periodicityHighlight = computed(() => {
     height: 100%;
     top: 0;
     left: 0;
+
+    cursor: pointer;
 }
 
 .plan:has(input:checked) {
     border-color: var(--Purplish-blue);
     background-color: var(--Almost-transparent-purplish-blue);
+}
+
+.plan:hover {
+    border-color: var(--Purplish-blue);
 }
 
 #monthly {

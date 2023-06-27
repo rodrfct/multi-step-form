@@ -133,6 +133,12 @@ const periodicityAbbreviated = computed(() => props.selections.periodicity == "y
     margin: 5px 0 0 0;
     text-decoration: underline;
     cursor: pointer;
+
+    transition: color .2s ease;
+}
+
+.selection p:hover {
+    color: var(--Purplish-blue) !important;
 }
 
 .total {

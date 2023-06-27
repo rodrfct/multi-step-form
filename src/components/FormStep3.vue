@@ -124,6 +124,10 @@ const customizableProfile = computed({
     background-color: var(--Almost-transparent-purplish-blue);
 }
 
+.addon:hover {
+    border-color: var(--Purplish-blue);
+}
+
 .checkbox {
     width: 15px;
     height: 15px;
@@ -147,7 +151,8 @@ const customizableProfile = computed({
     left: 0;
     width: 100%;
     height: 100%;
-
     margin: 0;
+
+cursor: pointer;
 }
 </style>

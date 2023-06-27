@@ -71,11 +71,13 @@ const bgImage = computed(() => {
 
     background-repeat: no-repeat;
     background-size: 100%;
+    min-width: fit-content;
 }
 
 .sidebar ol {
     list-style: none;
     margin: auto;
+    padding: 0 12%;
 
     color: var(--White);
 }
