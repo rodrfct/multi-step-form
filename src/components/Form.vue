@@ -4,6 +4,9 @@ import Step1 from './FormStep1.vue'
 import Step2 from './FormStep2.vue'
 import Step3 from './FormStep3.vue'
 import Step4 from './FormStep4.vue'
+import ThankYou from './ThankYou.vue';
+
+const isSubmitted = ref<boolean>(false)
 
 const props = defineProps({
     step: {
@@ -113,45 +116,50 @@ const selections = ref<selectionsInterface>({
 
 function submitForm() {
     console.log(selections.value)
+    isSubmitted.value = true
 }
 
 </script>
 
 <template>
-    <form id="form">
-        <Step1 v-show="props.step == 1"
-        :selectionsStep1="selections?.personalInfo"
-        @nameChange="(val: string) => {selections.personalInfo.name = val }"
-        @mailChange="(val: string) => {selections.personalInfo.mail = val }"
-        @phoneChange="(val: string) => {selections.personalInfo.phone = val }" />
+    <form v-if="!isSubmitted" id="form">
+        <Step1 v-if="props.step == 1"
+            :selectionsStep1="selections?.personalInfo"
+            @nameChange="(val: string) => {selections.personalInfo.name = val }"
+            @mailChange="(val: string) => {selections.personalInfo.mail = val }"
+            @phoneChange="(val: string) => {selections.personalInfo.phone = val }"
+        />
 
-        <Step2 v-show="props.step == 2" :planPricing="planPricing"
-        :selectedPlan="selections.plan"
-        :yearlyPlan="selections.periodicity"
-        @planChange="(val: Plan) => {selections.plan = val}"
-        @periodicityChange="(val: boolean) => {val ? selections.periodicity = 'yearly' : selections.periodicity = 'monthly'}" />
+        <Step2 v-else-if="props.step == 2" :planPricing="planPricing"
+            :selectedPlan="selections.plan"
+            :yearlyPlan="selections.periodicity"
+            @planChange="(val: Plan) => {selections.plan = val}"
+            @periodicityChange="(val: boolean) => {val ? selections.periodicity = 'yearly' : selections.periodicity = 'monthly'}"
+        />
 
-        <Step3 v-show="props.step == 3"
-        :addonsPricing="addonsPricing"
-        :yearlyPlan="selections.periodicity"
-        :seletedAddons="selections.addons"
-        @onlineServiceChange="(val: boolean) => {selections.addons.onlineService = val}"
-        @largerStorageChange="(val: boolean) => {selections.addons.largerStorage = val}"
-        @customizableProfileChange="(val: boolean) => {selections.addons.customizableProfile = val}" />
+        <Step3 v-else-if="props.step == 3"
+            :addonsPricing="addonsPricing"
+            :yearlyPlan="selections.periodicity"
+            :seletedAddons="selections.addons"
+            @onlineServiceChange="(val: boolean) => {selections.addons.onlineService = val}"
+            @largerStorageChange="(val: boolean) => {selections.addons.largerStorage = val}"
+            @customizableProfileChange="(val: boolean) => {selections.addons.customizableProfile = val}"
+        />
 
-        <Step4 v-show="props.step == 4"
-        :selections="selections"
-        :planPricing="planPricing"
-        :addonsPricing="addonsPricing"
-        @selectStep="(selectedStep) => {$emit('select-step', selectedStep)}" />
+        <Step4 v-else-if="props.step == 4"
+            :selections="selections"
+            :planPricing="planPricing"
+            :addonsPricing="addonsPricing"
+            @selectStep="(selectedStep) => {$emit('select-step', selectedStep)}" 
+        />
     
         <div class="step-switcher">
             <button v-show="props.step > 1" @click="$emit('step-back')" type="button" id="back-btn">Go Back</button>
             <button v-show="props.step < 4" @click="$emit('step-forward')" type="button" id="forward-btn">Next Step</button>
-            <button v-show="props.step == 4" type="button" id="confirm-btn"
-            @click="submitForm">Confirm</button>
+            <button v-show="props.step == 4" type="button" id="confirm-btn" @click="submitForm">Confirm</button>
         </div>
     </form>
+    <ThankYou v-else />
 </template>
 
 <style>
