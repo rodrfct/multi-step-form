@@ -4,9 +4,6 @@ import Step1 from './FormStep1.vue'
 import Step2 from './FormStep2.vue'
 import Step3 from './FormStep3.vue'
 import Step4 from './FormStep4.vue'
-import ThankYou from './ThankYou.vue';
-
-const isSubmitted = ref<boolean>(false)
 
 const props = defineProps({
     step: {
@@ -15,7 +12,7 @@ const props = defineProps({
     }
 })
 
-defineEmits(['step-back', 'step-forward', 'select-step'])
+const emit = defineEmits(['step-back', 'step-forward', 'select-step', 'submited', 'validated'])
 
 export interface planPricingInterface {
     arcade: {
@@ -116,18 +113,19 @@ const selections = ref<selectionsInterface>({
 
 function submitForm() {
     console.log(selections.value)
-    isSubmitted.value = true
+    emit('submited')
 }
 
 </script>
 
 <template>
-    <form v-if="!isSubmitted" id="form">
+    <form id="form">
         <Step1 v-if="props.step == 1"
             :selectionsStep1="selections?.personalInfo"
             @nameChange="(val: string) => {selections.personalInfo.name = val }"
             @mailChange="(val: string) => {selections.personalInfo.mail = val }"
             @phoneChange="(val: string) => {selections.personalInfo.phone = val }"
+            @validated="(val: boolean) => {$emit('validated', val)}"
         />
 
         <Step2 v-else-if="props.step == 2" :planPricing="planPricing"
@@ -159,7 +157,6 @@ function submitForm() {
             <button v-show="props.step == 4" type="button" id="confirm-btn" @click="submitForm">Confirm</button>
         </div>
     </form>
-    <ThankYou v-else />
 </template>
 
 <style>

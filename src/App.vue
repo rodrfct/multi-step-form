@@ -8,18 +8,30 @@ const step = ref<number>(1)
 
 const isSubmitted = ref<boolean>(false)
 
+const validationPassed = ref<boolean>(false)
+
+const selectStep = (selectedStep: number) => {
+  console.log(validationPassed.value)
+  
+  if (!validationPassed.value) {return}
+
+  if (selectedStep >= 1 && selectedStep <= 4) {
+    step.value = selectedStep}
+  }
+
 </script>
 
 <template>
 <div class="wrapper">
   <Sidebar :step="step"
-  @selectStep="(selectedStep: number) => {if (selectedStep >= 1 && selectedStep <= 4) {step = selectedStep}}" />
+  @selectStep="selectStep" />
 
   <Form v-if="!isSubmitted" :step="step"
-  @stepBack="() => {if (step > 1) {step--}}" 
-  @stepForward="() => {if (step < 4) {step++}}"
-  @selectStep="(selectedStep: number) => {if (selectedStep >= 1 && selectedStep <= 4) {step = selectedStep}}"
-  @submit.prevent="() => {isSubmitted = true}" />
+    @stepBack="() => {if (step > 1) {step--}}" 
+    @stepForward="() => {if (step < 4 && validationPassed) {step++}}"
+    @validated="(val) => {validationPassed = val}"
+    @submited="() => {isSubmitted = true}"
+  />
 
   <ThankYou v-else />
 </div>
