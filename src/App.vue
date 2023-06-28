@@ -11,9 +11,7 @@ const isSubmitted = ref<boolean>(false)
 const validationPassed = ref<boolean>(false)
 
 const selectStep = (selectedStep: number) => {
-  console.log(validationPassed.value)
-  
-  if (!validationPassed.value) {return}
+  if (!validationPassed.value || isSubmitted.value) {return}
 
   if (selectedStep >= 1 && selectedStep <= 4) {
     step.value = selectedStep}
