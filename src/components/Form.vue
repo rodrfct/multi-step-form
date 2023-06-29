@@ -237,4 +237,38 @@ function submitForm() {
     color: var(--Cool-gray);
 }
 
+@media (width < 400px) {
+    #form {
+        position: relative;
+        padding: 0;
+        margin: 0;
+    }
+
+    #form fieldset {
+        position: absolute;
+        top: -75px;
+
+        margin: 0 5%;
+        padding: 40px 20px 20px 20px;
+
+        background-color: var(--Alabaster);
+        border-radius: 15px;
+
+        box-shadow: -1px 1px 4px #999;
+    }
+
+    #form fieldset legend {
+        position: relative;
+        top: 30px;
+    }
+
+    .step-switcher {
+        position: fixed;
+        bottom: 0;
+
+        background-color: var(--Alabaster);
+        padding: 10px;
+    }
+}
+
 </style>

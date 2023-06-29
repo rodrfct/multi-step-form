@@ -38,7 +38,8 @@ const selectStep = (selectedStep: number) => {
 <style scoped>
 .wrapper {
   background-color: var(--Alabaster);
-  max-width: 70%;
+  width: 90%;
+  max-width: 800px;
   min-height: 60vh;
   margin: auto;
   padding: 13px;
@@ -47,4 +48,17 @@ const selectStep = (selectedStep: number) => {
   display: grid;
   grid-template-columns: 33% 1fr;
 }
+
+@media (width < 400px) {
+  .wrapper {
+    grid-template-columns: 1fr;
+    grid-template-rows: 40% 1fr;
+
+    padding: 0;
+    width: 100%;
+    height: 100%;
+
+  }
+}
+
 </style>

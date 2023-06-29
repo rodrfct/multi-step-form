@@ -129,8 +129,9 @@ const customizableProfile = computed({
 }
 
 .checkbox {
-    width: 15px;
-    height: 15px;
+    --size: 15px;
+    width: var(--size);
+    height: var(--size);
 
     border: 1px solid var(--Light-gray);
     border-radius: 3px;
@@ -154,5 +155,11 @@ const customizableProfile = computed({
     margin: 0;
 
 cursor: pointer;
+}
+
+@media (width < 400px) {
+    .checkbox {
+        --size: 20px;
+    }
 }
 </style>

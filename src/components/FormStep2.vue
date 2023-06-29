@@ -218,4 +218,41 @@ input + .slider {
 input:checked + .slider:before {
   transform: translateX(97%);
 }
+
+@media (width < 400px) {
+    fieldset {
+        padding-bottom: 20% !important;
+    }
+    
+    .plan-selector {
+        grid-template-columns: 1fr;
+        grid-template-rows: repeat(3, 20%);
+    }
+
+    .plan {
+        height: fit-content;
+        display: grid;
+        grid-template-columns: auto 1fr;
+        align-items: start;
+        column-gap: 10px;
+    }
+
+    .plan .pricing, .plan label {
+        grid-column: 2;
+        grid-row: 1;
+    }
+
+    .pricing {
+        align-self: end;
+    }
+
+    .discount {
+        grid-column: 2;
+    }
+
+    .plan img {
+        margin: 0 0 5px 0;
+    }
+}
+
 </style>

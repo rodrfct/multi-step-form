@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { computed } from 'vue';
+import { computed, ref } from 'vue';
 import bgDesktop from '../assets/backgrounds/bg-sidebar-desktop.svg'
 import bgMobile from '../assets/backgrounds/bg-sidebar-mobile.svg'
 
@@ -12,12 +12,18 @@ const props = defineProps({
 
 defineEmits(['select-step'])
 
+const windowWidth = ref(window.innerWidth)
+
 const bgImage = computed(() => {
-    if (window.innerWidth > 420) {
+    if (windowWidth.value > 420) {
         return bgDesktop
     } else {
         return bgMobile
     }
+})
+
+window.addEventListener('resize', () => {
+    windowWidth.value = window.innerWidth
 })
 
 </script>
@@ -131,4 +137,28 @@ const bgImage = computed(() => {
     color: var(--Marine-blue);
     border-color: var(--Pastel-blue);
 }
+
+@media (width < 400px) {
+    .sidebar {
+        height: 100%;
+        padding-top: 5%;
+    }
+
+    .sidebar ol {
+        display: flex;
+        justify-content: space-between;
+
+        padding: 0 22%;
+    }
+
+    .sidebar li > *:not(.number) {
+        display: none;
+    }
+
+    .number {
+        --size: 34px;
+        border-radius: 50%;
+    }
+}
+
 </style>

@@ -30,4 +30,23 @@
     color: var(--Cool-gray);
 }
 
+@media (width < 400px) {
+    .thank-you {
+        position: absolute;
+        top: 16%;
+
+        margin: 0 5%;
+        padding: 40px 20px 20px 20px;
+
+        background-color: var(--Alabaster);
+        border-radius: 15px;
+
+        box-shadow: -1px 1px 4px #999;
+    }
+
+    .thank-you img {
+        width: 60px;
+        margin: 0 auto 7% auto;
+    }
+}
 </style>

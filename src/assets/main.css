@@ -31,8 +31,13 @@
 --White: hsl(0, 0%, 100%);
 }
 
+* {
+  box-sizing: border-box;
+}
+
 body {
   font-family: 'Ubuntu', sans-serif;
   font-size: 16px;
   background-color: var(--Magnolia);
+  margin: 0;
 }
